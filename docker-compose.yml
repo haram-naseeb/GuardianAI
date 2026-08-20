@@ -1,0 +1,26 @@
+# Guardian AI — local container orchestration.
+# `docker compose up --build`  →  frontend on :5173, backend on :8000.
+# Runs in mock mode by default (no credentials needed). Supply real providers
+# via an env file when they're ready (see .env.example).
+
+services:
+  backend:
+    build: ./backend
+    environment:
+      USE_MOCK_SERVICES: "true"
+      APP_ENV: "development"
+    ports:
+      - "8000:8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/v1/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "5173:80"   # nginx serves the built SPA and proxies /api -> backend:8000

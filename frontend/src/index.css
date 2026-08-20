@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Guardian AI design tokens (Sections 6, 7).
+ * Calm, neutral base + a restrained burgundy/deep-red accent. Red is reserved
+ * for emergency, critical state, and urgent action — never the whole UI.
+ */
+@layer base {
+  :root {
+    --background: 30 33% 99%;
+    --foreground: 240 10% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 9%;
+
+    --primary: 345 63% 37%; /* burgundy */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 96%;
+    --secondary-foreground: 240 6% 12%;
+    --muted: 240 5% 96%;
+    --muted-foreground: 240 4% 44%;
+    --accent: 240 5% 95%;
+    --accent-foreground: 240 6% 12%;
+
+    --border: 240 6% 90%;
+    --input: 240 6% 88%;
+    --ring: 345 63% 37%;
+    --radius: 0.85rem;
+
+    /* Priority scale */
+    --critical: 0 72% 46%;
+    --critical-foreground: 0 0% 100%;
+    --critical-soft: 0 78% 96%;
+    --high: 24 88% 46%;
+    --high-foreground: 0 0% 100%;
+    --high-soft: 28 90% 95%;
+    --moderate: 41 92% 42%;
+    --moderate-foreground: 40 60% 10%;
+    --moderate-soft: 45 92% 93%;
+    --low: 152 52% 36%;
+    --low-foreground: 0 0% 100%;
+    --low-soft: 150 52% 94%;
+  }
+
+  .dark {
+    --background: 240 9% 6%;
+    --foreground: 0 0% 96%;
+    --card: 240 8% 9%;
+    --card-foreground: 0 0% 96%;
+    --popover: 240 9% 8%;
+    --popover-foreground: 0 0% 96%;
+
+    --primary: 347 70% 52%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 5% 15%;
+    --secondary-foreground: 0 0% 92%;
+    --muted: 240 5% 14%;
+    --muted-foreground: 240 5% 62%;
+    --accent: 240 5% 16%;
+    --accent-foreground: 0 0% 92%;
+
+    --border: 240 5% 18%;
+    --input: 240 5% 22%;
+    --ring: 347 70% 52%;
+
+    --critical: 0 78% 58%;
+    --critical-foreground: 0 0% 100%;
+    --critical-soft: 0 55% 14%;
+    --high: 26 92% 56%;
+    --high-foreground: 20 50% 8%;
+    --high-soft: 26 55% 14%;
+    --moderate: 45 92% 56%;
+    --moderate-foreground: 45 60% 9%;
+    --moderate-soft: 45 45% 13%;
+    --low: 150 52% 50%;
+    --low-foreground: 150 50% 8%;
+    --low-soft: 150 35% 13%;
+  }
+
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    min-height: 100vh;
+  }
+  /* Accessible focus ring everywhere (Section 31). */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.18);
+  }
+}
+
+@layer components {
+  /* Restrained glass panel used sparingly for the header and overlays. */
+  .glass {
+    @apply bg-background/70 backdrop-blur-xl backdrop-saturate-150;
+  }
+  .surface {
+    @apply rounded-lg border bg-card text-card-foreground shadow-soft;
+  }
+  /* Subtle grid backdrop for the command-center feel. */
+  .grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--border) / 0.5) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.5) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 30%, transparent 75%);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  [dir="rtl"] .flip-rtl {
+    transform: scaleX(-1);
+  }
+}

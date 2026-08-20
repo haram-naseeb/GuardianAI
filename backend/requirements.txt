@@ -1,0 +1,17 @@
+# Guardian AI — Backend dependencies
+# Core web framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+pydantic-settings==2.7.1
+python-multipart==0.0.20
+
+# --- Future / real-integration dependencies (kept commented so the app runs
+# --- today with zero AI credentials. Uncomment as each provider is wired in.) ---
+# langgraph==0.2.60            # real agent-graph orchestration (Section 25)
+# langchain-core==0.3.28
+# faiss-cpu==1.9.0             # real vector search for RAG (Section 26)
+# openai==1.59.0              # or the selected LLM/vision provider SDK
+# dashscope                   # Alibaba / Qwen SDK (tomorrow's integration)
+# faster-whisper==1.1.0       # real speech-to-text (Section 23)
+# httpx==0.28.1               # real hospital / location API calls

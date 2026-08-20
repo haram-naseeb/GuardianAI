@@ -1,0 +1,93 @@
+{
+  "description": "Representative emergencies covering the priority spectrum. Each case asserts properties of the assessment, not exact wording. All inputs are synthetic (no real patient data, spec §28).",
+  "endpoint": "POST /api/v1/emergency/analyze",
+  "cases": [
+    {
+      "id": "road-accident-critical",
+      "input": {
+        "description": "A motorbike hit a pedestrian near the market. He is on the ground, bleeding from the head and not responding.",
+        "language": "en",
+        "clarifications": {}
+      },
+      "expect": {
+        "priority_in": ["CRITICAL", "HIGH"],
+        "incident_type": "ROAD_ACCIDENT",
+        "contact_emergency_services": true,
+        "min_immediate_actions": 3,
+        "sources_nonempty": true,
+        "disclaimer_present": true
+      }
+    },
+    {
+      "id": "cardiac-high",
+      "input": {
+        "description": "My father has severe chest pain and is sweating and short of breath.",
+        "language": "en",
+        "clarifications": {}
+      },
+      "expect": {
+        "priority_in": ["CRITICAL", "HIGH"],
+        "incident_type": "CARDIAC",
+        "contact_emergency_services": true,
+        "sources_nonempty": true,
+        "disclaimer_present": true
+      }
+    },
+    {
+      "id": "minor-cut-low",
+      "input": {
+        "description": "I have a small cut on my finger from a knife. It is bleeding a little.",
+        "language": "en",
+        "clarifications": {}
+      },
+      "expect": {
+        "priority_in": ["LOW", "MODERATE"],
+        "incident_type_in": ["MINOR_INJURY", "BLEEDING"],
+        "contact_emergency_services": false,
+        "sources_nonempty": true,
+        "disclaimer_present": true
+      }
+    },
+    {
+      "id": "fall-elderly",
+      "input": {
+        "description": "An elderly woman slipped and fell. She cannot move her leg and is in a lot of pain.",
+        "language": "en",
+        "clarifications": {}
+      },
+      "expect": {
+        "priority_in": ["HIGH", "MODERATE"],
+        "incident_type": "FALL",
+        "sources_nonempty": true,
+        "disclaimer_present": true
+      }
+    },
+    {
+      "id": "burn-child-scald",
+      "input": {
+        "description": "A child spilled boiling water and has a burn on the arm.",
+        "language": "en",
+        "clarifications": {}
+      },
+      "expect": {
+        "priority_in": ["HIGH", "MODERATE"],
+        "incident_type": "BURN",
+        "sources_nonempty": true,
+        "disclaimer_present": true
+      }
+    },
+    {
+      "id": "urdu-input-roundtrip",
+      "input": {
+        "description": "Mere bhai ka accident ho gaya hai, woh zameen par gira hua hai aur khoon beh raha hai.",
+        "language": "ur",
+        "clarifications": {}
+      },
+      "expect": {
+        "priority_in": ["CRITICAL", "HIGH"],
+        "language": "ur",
+        "disclaimer_present": true
+      }
+    }
+  ]
+}

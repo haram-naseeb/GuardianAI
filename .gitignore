@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────────────────────
+# Guardian AI — .gitignore
+# SECURITY (spec §28): secrets and .env files must NEVER be committed.
+# ─────────────────────────────────────────────────────────────────────────
+
+# Environment / secrets — never commit real credentials or patient data
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Python (backend)
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node / frontend
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.tsbuildinfo
+*.local
+
+# Build / logs
+*.log
+logs/
+build/
+
+# Knowledge base — keep structure & docs, ignore generated artifacts and raw dumps
+knowledge-base/processed/*
+!knowledge-base/processed/.gitkeep
+knowledge-base/raw/*
+!knowledge-base/raw/.gitkeep
+!knowledge-base/**/README.md
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+
+# Never commit anything that could contain real patient information (§28)
+*patient*.json
+*cnic*
+scratch/
